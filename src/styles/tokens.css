@@ -1,0 +1,66 @@
+:root {
+  /* Primitive tokens: verified palette and a 4px spacing scale. */
+  --carbon-950: #10131b;
+  --carbon-900: #171c29;
+  --carbon-800: #202739;
+  --carbon-700: #303849;
+  --blue-500: #547cff;
+  --blue-600: #3156e8;
+  --blue-300: #91acff;
+  --paper-50: #f3f5f9;
+  --gray-400: #a8b0c0;
+  --gray-600: #50596a;
+  --gray-200: #cbd1dc;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  /* Semantic tokens: each foreground has an explicit surface. */
+  --color-background: var(--carbon-950);
+  --color-surface: var(--carbon-900);
+  --color-elevated: var(--carbon-800);
+  --color-border: var(--carbon-700);
+  --color-text: var(--paper-50);
+  --color-muted: var(--gray-400);
+  --color-accent: var(--blue-500);
+  --color-accent-hover: var(--blue-300);
+  --color-focus: var(--blue-300);
+  --color-paper: var(--paper-50);
+  --color-ink: var(--carbon-950);
+  --color-paper-muted: var(--gray-600);
+  --color-paper-border: var(--gray-200);
+  --color-paper-accent: var(--blue-600);
+  --font-heading: "Barlow Condensed", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-label: 0.75rem;
+  --gutter: clamp(24px, 6vw, 112px);
+  --section-space: clamp(64px, 7vw, 112px);
+  --content-width: 1680px;
+  --duration-fast: 140ms;
+  --duration-normal: 280ms;
+  --duration-reveal: 400ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Component tokens. */
+  --button-background: var(--color-accent);
+  --button-foreground: var(--color-ink);
+  --button-height: 56px;
+  --button-padding: var(--space-4) var(--space-6);
+  --control-height: 48px;
+  --option-border: var(--color-border);
+  --option-selected-background: color-mix(
+    in srgb,
+    var(--color-accent) 10%,
+    transparent
+  );
+  --header-height: 80px;
+}

@@ -12,16 +12,15 @@ export const site = {
   contact: { whatsapp: "", instagram: "" },
   modalities: { online: false, presencial: false },
   images: {
-    hero: "/assets/images/athlete-660.webp",
-    coach: "/assets/images/coach-660.webp",
+    hero: "/assets/images/training-1170.webp",
+    coach: "/assets/images/practice.webp",
     heroSrcSet:
-      "/assets/images/athlete-400.webp 400w, /assets/images/athlete-660.webp 660w",
-    coachSrcSet:
-      "/assets/images/coach-400.webp 400w, /assets/images/coach-660.webp 660w",
+      "/assets/images/training-600.webp 600w, /assets/images/training-1170.webp 1170w",
+    coachSrcSet: "/assets/images/practice.webp 416w",
     heroAlt:
-      "Fotografia ilustrativa de atleta com halteres; substituir pela foto do personal",
+      "Fotografia de referência de um atleta durante uma série na barra fixa",
     coachAlt:
-      "Retrato ilustrativo de atleta; não representa o personal responsável",
+      "Fotografia de referência de uma atleta em um exercício com barra",
     illustrative: true,
   },
   stories: [] as {
@@ -39,7 +38,7 @@ export const site = {
     url: string;
   }[],
   cta: {
-    primary: "Começar minha evolução",
+    primary: "Vamos falar do meu treino",
     journey: "Conversar sobre minha jornada",
   },
   seo: {

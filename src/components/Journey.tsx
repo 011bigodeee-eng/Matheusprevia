@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowRight,
   ArrowLeft,
@@ -34,9 +34,16 @@ export default function Journey() {
   const title = useRef<HTMLHeadingElement>(null);
   const moved = useRef(false);
   const reduced = useReducedMotion();
-  useEffect(() => {
-    if (moved.current) title.current?.focus({ preventScroll: true });
-  }, [step]);
+  const focusStep = () => {
+    if (!moved.current || !title.current) return;
+    const heading = title.current;
+    heading.focus({ preventScroll: true });
+    const box = heading.getBoundingClientRect();
+    // A step change is explicit navigation; keep its focused title below the header.
+    if (box.top < 104 || box.bottom > window.innerHeight - 24) {
+      heading.scrollIntoView({ block: "center", behavior: "instant" });
+    }
+  };
   const go = (value: number) => {
     moved.current = true;
     setStep(value);
@@ -98,13 +105,8 @@ export default function Journey() {
   return (
     <div className="section journey-section">
       <div className="section-top">
-        <span className="eyebrow">
-          <span />
-          01 / SEU PONTO DE PARTIDA
-        </span>
-        <span className="small-note">
-          FEITO PARA A SUA VIDA. NÃO O CONTRÁRIO.
-        </span>
+        <span className="eyebrow">FICHA DE PARTIDA / 01</span>
+        <span className="small-note">QUATRO PERGUNTAS. SEM CADASTRO.</span>
       </div>
       <div className="journey-intro">
         <h2>
@@ -132,7 +134,7 @@ export default function Journey() {
             height="753"
           />
           <div className="visual-caption">
-            <span className="eyebrow">UM PASSO DE CADA VEZ</span>
+            <span className="eyebrow">SEU PONTO DE PARTIDA</span>
             <h3>{goals[answers.goal ?? 3].short}</h3>
             <p>{goals[answers.goal ?? 3].description}</p>
             {site.images.illustrative && (
@@ -142,7 +144,7 @@ export default function Journey() {
         </aside>
         <div className="journey-panel">
           <div className="step-meta">
-            <span>SEU PLANO COMEÇA COM VOCÊ</span>
+            <span>UMA CONVERSA ANTES DO TREINO</span>
             <span aria-live="polite">
               {String(step + 1).padStart(2, "0")} / 05
             </span>
@@ -155,20 +157,17 @@ export default function Journey() {
             aria-valuemin={1}
             aria-valuemax={5}
           >
-            <span style={{ width: `${(step + 1) * 20}%` }} />
+            <span style={{ transform: `scaleX(${(step + 1) / 5})` }} />
           </div>
           <LazyMotion features={domAnimation}>
             <AnimatePresence mode="wait" initial={false}>
               <m.div
-                onAnimationComplete={() => {
-                  if (moved.current)
-                    title.current?.focus({ preventScroll: true });
-                }}
+                onAnimationComplete={focusStep}
                 key={step}
                 initial={{ opacity: 0, y: reduced ? 0 : 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: reduced ? 0 : -8 }}
-                transition={{ duration: reduced ? 0 : 0.25 }}
+                transition={{ duration: reduced ? 0 : 0.28 }}
                 className="step-body"
               >
                 <h3 ref={title} tabIndex={-1}>

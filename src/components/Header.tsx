@@ -13,9 +13,11 @@ export function Brand({ onNavigate }: { onNavigate?: () => void } = {}) {
       onClick={onNavigate}
       className="brand"
       href="#inicio"
-      aria-label="The Consistency Project, início"
+      title="Voltar ao início"
     >
-      <span className="brand-mark">//</span>
+      <span className="brand-mark" aria-hidden="true">
+        C<span>.</span>
+      </span>
       <span>
         THE CONSISTENCY
         <br />

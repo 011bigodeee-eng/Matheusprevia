@@ -1,7 +1,6 @@
 import { containDialogFocus } from "./dialogFocus";
 import { useEffect, useRef, useState } from "react";
 import {
-  Asterisk,
   ArrowDown,
   ArrowLeft,
   ArrowRight,
@@ -11,7 +10,6 @@ import {
   Play,
   Plus,
   Quote,
-  MoveUpRight,
 } from "lucide-react";
 import Photo from "./Photo";
 import { site } from "../config/site";
@@ -51,145 +49,137 @@ const phases = [
 ];
 export function Hero() {
   return (
-    <section className="hero" id="inicio">
-      <div className="hero-grid-lines" aria-hidden="true" />
-      <div className="hero-art">
-        <span className="hero-ring" />
-        <span className="vertical-label">DISCIPLINA É LIBERDADE.</span>
-        <span className="hero-ghost" aria-hidden="true">
-          CONTINUE.
-        </span>
+    <section className="hero campaign-hero" id="inicio">
+      <div className="campaign-meta">
+        <span>TREINAMENTO INDIVIDUALIZADO</span>
+        <span>CONSTÂNCIA TRANSFORMA.</span>
+      </div>
+      <div className="hero-art campaign-photo">
         <Photo
           className="hero-image"
           src={site.images.hero}
-          alt="Fotografia ilustrativa de atleta com halteres; substituir pela foto do personal"
-          width="660"
-          height="753"
+          alt={site.images.heroAlt}
+          width="1170"
+          height="500"
           fetchPriority="high"
         />
-        {site.images.illustrative && (
-          <span className="photo-credit">
-            FOTOGRAFIA ILUSTRATIVA / IDENTIDADE EM CONSTRUÇÃO
+        <div className="campaign-photo-caption">
+          <span>O PRÓXIMO TREINO.</span>
+          <span>
+            {site.images.illustrative
+              ? "FOTOGRAFIA DE REFERÊNCIA"
+              : site.personal.name}
           </span>
-        )}
-        <div className="hero-art-tag">
-          <span className="blue-dot" /> MENOS RECOMEÇOS.
-          <br />
-          <strong>MAIS CONSTÂNCIA.</strong>
         </div>
       </div>
       <div className="hero-content">
-        <div className="hero-eyebrow">
-          <span className="short-line" /> TREINAMENTO COM PROPÓSITO
-        </div>
         <h1>
-          VOCÊ NÃO
-          <br />
-          PRECISA
-          <br />
-          RECOMEÇAR.
-          <br />
-          <em>
-            PRECISA
-            <br />
-            CONTINUAR.
-          </em>
+          <span className="hero-preface">VOCÊ NÃO PRECISA RECOMEÇAR.</span>
+          <span className="hero-word">PRECISA</span>
+          <em>CONTINUAR.</em>
         </h1>
-        <p>
-          Treinamento com estratégia, acompanhamento e um método que se adapta à
-          sua rotina. Porque evolução de verdade se constrói com constância.
-        </p>
-        <div className="hero-actions">
-          <a className="button primary" href="#jornada">
-            {site.cta.primary}
-            <ArrowUpRight size={20} />
-          </a>
-          <a className="hero-secondary" href="#metodo">
-            Conhecer o método <ArrowDown size={15} />
-          </a>
+        <div className="campaign-summary">
+          <div>
+            <p>
+              Tem semana corrida. Tem dia sem vontade. O treino precisa levar
+              isso em conta.
+            </p>
+            <div className="hero-actions">
+              <a className="button primary" href="#jornada">
+                {site.cta.primary}
+                <ArrowUpRight size={20} />
+              </a>
+              <a className="hero-secondary" href="#metodo">
+                Como funciona <ArrowDown size={15} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <div className="hero-bottom">
-        <a href="#jornada">
-          <span className="scroll-icon">
-            <ArrowDown size={15} />
-          </span>{" "}
-          A EVOLUÇÃO É UM PROCESSO. COMECE O SEU.
+        <a href="#constancia">
+          <ArrowDown size={15} /> NÃO PRECISA SER PERFEITO. PRECISA SER
+          POSSÍVEL.
         </a>
-        <span>ESTRATÉGIA. ACOMPANHAMENTO. CONSTÂNCIA.</span>
+        <span>CONSTÂNCIA TRANSFORMA.</span>
       </div>
     </section>
   );
 }
 export function Manifesto() {
   return (
-    <div className="manifesto-strip">
-      <span>CONSTÂNCIA TRANSFORMA</span>
-      <Asterisk className="strip-star" aria-hidden="true" />
-      <span>UM TREINO DE CADA VEZ</span>
-      <Asterisk className="strip-star" aria-hidden="true" />
-      <span>CONSTÂNCIA TRANSFORMA</span>
-      <Asterisk className="strip-star" aria-hidden="true" />
+    <div className="field-strip">
+      <span className="field-strip-title">UMA REGRA SIMPLES.</span>
+      <p>
+        Um treino ruim não apaga os anteriores.
+        <br />
+        <strong>Um dia perdido não precisa virar um mês.</strong>
+      </p>
+      <ArrowUpRight className="field-strip-mark" aria-hidden="true" />
     </div>
   );
 }
 export function Problem() {
   return (
-    <section className="section problem" id="constancia">
+    <section className="section problem notebook-section" id="constancia">
       <div className="problem-heading">
-        <span className="eyebrow">
-          <span />
-          02 / ALÉM DA MOTIVAÇÃO
-        </span>
+        <span className="eyebrow">ANOTAÇÃO 01 / A ROTINA REAL</span>
         <h2>
-          COMEÇAR
-          <br />É FÁCIL.
+          O PLANO
           <br />
-          <span className="muted-heading">CONTINUAR</span>
-          <br />É O DESAFIO.
+          ERA TREINAR.
+          <br />
+          <em>
+            A VIDA
+            <br />
+            ACONTECEU.
+          </em>
         </h2>
         <p>
-          Você conhece a sensação. O primeiro dia, a energia lá em cima. Algumas
-          semanas depois, a vida acontece.
+          O trabalho esticou. Você dormiu mal. A academia ficou para amanhã.
+          Você não é a única pessoa que passa por isso.
         </p>
         <a className="inline-link" href="#metodo">
-          Existe um caminho mais sustentável <ArrowUpRight size={18} />
+          É aqui que o planejamento entra <ArrowUpRight size={18} />
         </a>
       </div>
-      <div className="problem-list">
-        {[
-          [
-            "01",
-            "O impulso passa.",
-            "Você começa com tudo, treina por algumas semanas e, aos poucos, perde o ritmo.",
-          ],
-          [
-            "02",
-            "A rotina não espera.",
-            "Um plano que ignora a sua vida vira mais uma cobrança — e não um hábito.",
-          ],
-          [
-            "03",
-            "Esforço precisa de direção.",
-            "Sem saber como progredir ou organizar os treinos, fica difícil enxergar o próximo passo.",
-          ],
-        ].map(([n, t, d]) => (
-          <article key={n} className="reveal problem-item">
-            <span>{n}</span>
-            <div>
-              <h3>{t}</h3>
-              <p>{d}</p>
-            </div>
-            <MoveUpRight size={22} />
-          </article>
-        ))}
-        <div className="problem-conclusion">
-          <span className="blue-dot" />
-          <p>
-            A resposta não é se cobrar mais.
-            <br />
-            <strong>É construir um processo possível.</strong>
-          </p>
+      <div className="notebook-right">
+        <p className="notebook-note">
+          Um plano que só funciona
+          <br />
+          na semana perfeita
+          <br />
+          <span>precisa de ajustes.</span>
+        </p>
+        <div className="problem-list">
+          {[
+            [
+              "01",
+              "Começar com tudo. Parar de novo.",
+              "Quando o ritmo depende só da empolgação, qualquer imprevisto pesa mais.",
+            ],
+            [
+              "02",
+              "Treinar quando sobra tempo.",
+              "A rotina não costuma abrir espaço sozinha. O planejamento precisa partir do tempo que você tem.",
+            ],
+            [
+              "03",
+              "Repetir sem saber se está evoluindo.",
+              "Organizar, acompanhar e ajustar os treinos ajuda a decidir o próximo passo.",
+            ],
+          ].map(([n, t, d]) => (
+            <article key={n} className="reveal problem-item">
+              <span>{n}</span>
+              <div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="notebook-signoff">
+          O objetivo é encontrar um jeito de continuar.
         </div>
       </div>
     </section>
@@ -223,8 +213,9 @@ export function Method() {
         <span className="small-note">SEM ATALHOS. COM DIREÇÃO.</span>
       </div>
       <h2>
-        RESULTADO NÃO É SORTE.
-        <br />É <em>PROCESSO.</em>
+        ENTENDER. PLANEJAR.
+        <br />
+        <em>FAZER. AJUSTAR.</em>
       </h2>
       <div className="method-grid">
         <div className="method-visual">
@@ -297,7 +288,7 @@ export function Stories() {
           <span />
           04 / HISTÓRIAS DE EVOLUÇÃO
         </span>
-        <span className="small-note">PESSOAS REAIS. PROCESSOS DIFERENTES.</span>
+        <span className="small-note">CADA PESSOA TEM SEU PROCESSO.</span>
       </div>
       <div className="stories-layout">
         <div>
@@ -352,15 +343,15 @@ export function Stories() {
         ) : (
           <div className="story-placeholder">
             <Quote size={32} />
-            <span className="eyebrow">ESPAÇO RESERVADO A HISTÓRIAS REAIS</span>
+            <span className="eyebrow">RELATOS DOS ALUNOS</span>
             <h3>
-              Cada processo merece
+              Histórias de quem
               <br />
-              ser contado com verdade.
+              continua.
             </h3>
             <p>
-              Os relatos serão publicados aqui somente com autorização dos
-              alunos. Nenhum resultado ou depoimento fictício.
+              Os relatos autorizados dos alunos ainda não foram adicionados.
+              Este espaço está reservado para essas histórias.
             </p>
             <span className="status-pill">EM PREPARAÇÃO</span>
           </div>
@@ -403,10 +394,10 @@ export function Coach() {
           height="753"
         />
         <div className="coach-photo-label">
-          <span className="blue-dot" /> A PESSOA POR TRÁS DO PROCESSO
+          <span className="blue-dot" /> ESCUTA ANTES DO PLANEJAMENTO
         </div>
         {site.images.illustrative && (
-          <span className="image-label">RETRATO ILUSTRATIVO · SUBSTITUIR</span>
+          <span className="image-label">FOTO DE REFERÊNCIA · TREINAMENTO</span>
         )}
       </div>
       <div className="coach-copy">
@@ -415,12 +406,9 @@ export function Coach() {
           05 / CONHEÇA O COACH
         </span>
         <h2>
-          NÃO É SOBRE
+          ANTES DA FICHA,
           <br />
-          TREINAR MAIS.
-          <br />É SOBRE TREINAR
-          <br />
-          <em>COM DIREÇÃO.</em>
+          <em>UMA CONVERSA.</em>
         </h2>
         {site.personal.name ? (
           <h3>
@@ -433,7 +421,7 @@ export function Coach() {
         )}
         <p>
           {site.personal.biography ||
-            "Um bom acompanhamento começa com escuta. Entender sua rotina, respeitar seu ponto de partida e dar um propósito a cada etapa: essa é a filosofia desta proposta."}
+            "Quanto tempo você tem? O que já tentou? O que fez você parar? Antes de pensar em séries e repetições, essas perguntas precisam de resposta."}
         </p>
         {!site.personal.biography && (
           <p className="small-note">
@@ -512,15 +500,13 @@ export function Services() {
           <span />
           06 / ACOMPANHAMENTO
         </span>
-        <span className="small-note">
-          PERTO DO SEU OBJETIVO. DENTRO DA SUA ROTINA.
-        </span>
+        <span className="small-note">ONLINE OU PRESENCIAL</span>
       </div>
       <div className="services-heading">
         <h2>
-          SEU TREINO.
+          QUAL ACOMPANHAMENTO
           <br />
-          <em>SEU CONTEXTO.</em>
+          <em>CABE NA SUA VIDA?</em>
         </h2>
         <div
           className="tabs"
@@ -557,14 +543,12 @@ export function Services() {
         </div>
         <div className="service-copy" key={mode}>
           <span className="eyebrow">
-            {online
-              ? "DIREÇÃO, ONDE VOCÊ ESTIVER"
-              : "PRESENÇA EM CADA REPETIÇÃO"}
+            {online ? "CONSULTORIA ONLINE" : "PERSONAL PRESENCIAL"}
           </span>
           <h3>
             {online
-              ? "A distância muda.\nO propósito, não."
-              : "Técnica de perto.\nEvolução com direção."}
+              ? "Acompanhamento\nà distância."
+              : "Orientação durante\no seu treino."}
           </h3>
           <p>
             {online
@@ -645,13 +629,11 @@ export function Content() {
             <Play size={28} />
           </div>
           <div>
-            <span className="eyebrow">
-              CONTEÚDO REAL, SEM PUBLICAÇÕES INVENTADAS
-            </span>
-            <h3>O próximo capítulo vem da vida real.</h3>
+            <span className="eyebrow">VÍDEOS E BASTIDORES</span>
+            <h3>Publicações em preparação.</h3>
             <p>
-              Vídeos de execução, bastidores e conversas sobre constância serão
-              adicionados com os links oficiais do profissional.
+              Os conteúdos oficiais do profissional serão reunidos aqui, com
+              acesso às publicações originais.
             </p>
           </div>
           <span className="status-pill">EM PREPARAÇÃO</span>
@@ -666,12 +648,12 @@ export function FAQ() {
       <div>
         <span className="eyebrow">
           <span />
-          08 / SEM PONTAS SOLTAS
+          08 / PERGUNTAS FREQUENTES
         </span>
         <h2>
-          DÚVIDAS?
+          ANTES DE
           <br />
-          <em>VAMOS LÁ.</em>
+          <em>COMEÇAR.</em>
         </h2>
         <p>
           Clareza também faz parte
@@ -697,37 +679,26 @@ export function FAQ() {
 export function FinalCTA() {
   return (
     <section className="final-cta">
-      <Photo
-        className="final-portrait"
-        src={site.images.hero}
-        alt=""
-        loading="lazy"
-        width="660"
-        height="753"
-      />
-      <span className="eyebrow">
-        <span />O PRÓXIMO PASSO É SEU.
-      </span>
+      <span className="eyebrow">SEM ESPERAR A SEGUNDA-FEIRA.</span>
       <h2>
-        A MOTIVAÇÃO OSCILA.
+        O PRÓXIMO TREINO
         <br />
-        <em>
-          O MÉTODO TE MANTÉM
-          <br />
-          EM MOVIMENTO.
-        </em>
+        COMEÇA COM
+        <br />
+        <em>UMA CONVERSA.</em>
       </h2>
       <div className="final-bottom">
         <p>
-          Não espere pela rotina perfeita. Descubra como construir um processo
-          de treinamento que faça sentido para você.
+          Conte como é a sua semana.
+          <br />O que você quer mudar. O que tem sido difícil.
+          <br />A conversa começa por aí.
         </p>
         <div>
           <a className="button primary" href="#jornada">
-            Quero começar <ArrowUpRight size={19} />
+            Vamos conversar <ArrowUpRight size={19} />
           </a>
           <a className="inline-link" href="#duvidas">
-            Tirar minhas dúvidas <ArrowRight size={18} />
+            Ainda tenho dúvidas <ArrowRight size={18} />
           </a>
         </div>
       </div>

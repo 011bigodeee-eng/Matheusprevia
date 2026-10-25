@@ -1,4 +1,4 @@
-# Validação da implementação
+# Validação — revisão editorial com as skills
 
 Ambiente: Node.js 24.19.0, npm 11.9.0, Linux e Chromium disponível em `/usr/bin/chromium`.
 
@@ -9,27 +9,33 @@ Ambiente: Node.js 24.19.0, npm 11.9.0, Linux e Chromium disponível em `/usr/bin
 - `npm run typecheck`: aprovado.
 - `npm test`: 3 testes aprovados, nenhum ignorado. Objetivos/desafios, codificação da mensagem com acentos e ausência de links para contatos inválidos.
 - `npm run build`: aprovado; aplicação estática gerada em `dist/`.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser`: 5 testes aprovados, nenhum ignorado. As verificações incluem os quatro objetivos e todas as etapas, voltar preservando respostas, reiniciar, contato ausente, WhatsApp configurado por interceptação apenas no teste, teclado e foco, menu/Escape, método, modalidades, FAQ, imagens e ausência de erros de execução.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser`: 6 testes aprovados, nenhum ignorado. As verificações incluem os quatro objetivos e todas as etapas, voltar preservando respostas, reiniciar, contato ausente, WhatsApp configurado por interceptação apenas no teste, teclado e foco, menu/Escape, método, modalidades, FAQ, imagens, texto ampliado para 200%, foco abaixo do header e ausência de erros de execução.
 - O teste de WhatsApp captura a chamada a `window.open`, valida o número e a mensagem completa; não envia mensagem nem navega para um contato real.
 - Responsividade: ausência de overflow horizontal em 360, 375, 390, 430, 768, 1024, 1440 e 1920 pixels. Capturas e inspeção visual em desktop e mobile.
 - axe WCAG 2 A/AA e 2.1 AA: nenhuma violação automática em desktop, mobile com movimento reduzido e menu aberto. Testada a circulação do foco com Tab e o retorno ao botão ao fechar.
 
 ## Lighthouse de produção
 
-Uma execução local com Lighthouse 13.5.0, build de produção servido com `npm run preview`, perfil mobile padrão, latência de 150 ms, taxa de 1638,4 Kbps e redução de CPU de 4×:
+Medição refeita após a revisão visual e dos componentes. Uma execução local com Lighthouse 13.5.0, build de produção servido com `npm run preview`, perfil mobile padrão, latência de 150 ms, taxa de 1638,4 Kbps e redução de CPU de 4×:
 
 | Indicador      | Resultado |
 | -------------- | --------- |
-| Performance    | 95/100    |
+| Performance    | 93/100    |
 | Acessibilidade | 100/100   |
 | Boas práticas  | 100/100   |
 | SEO            | 100/100   |
-| FCP            | 2,0 s     |
-| LCP            | 2,7 s     |
-| TBT            | 40 ms     |
+| FCP            | 2,4 s     |
+| LCP            | 2,8 s     |
+| TBT            | 30 ms     |
 | CLS            | 0         |
 
 Os resultados são de laboratório e variam por execução, hospedagem, rede e fotos definitivas. O LCP ainda ficou acima da meta ideal de 2,5 s. TBT não é uma medição de INP em campo. A auditoria automatizada não substitui uma revisão com tecnologias assistivas.
+
+## Aplicação das skills
+
+As decisões de pesquisa, os resultados descartados e as adaptações à marca estão registrados em `design-system/consistency-project/MASTER.md`. A voz e a composição estão em `docs/brand-guidelines.md`. Os tokens executáveis estão em `src/styles/tokens.css`.
+
+Esta revisão retirou os atletas recortados, consolidou o CSS, ampliou os textos, reorganizou as composições e preservou a jornada, sem gerar planos de treino automáticos nem inventar dados do profissional.
 
 ## Pendências de conteúdo e publicação
 

@@ -92,7 +92,7 @@ test("mobile menu has keyboard focus, Escape, links and methods work", async ({
     .getByRole("button", { name: "PRESENCIAL", exact: true })
     .click();
   await expect(page.locator(".service-copy")).toContainText(
-    "Técnica de perto.",
+    "Orientação durante",
   );
   const question = page.locator("#duvidas summary").first();
   await question.click();
@@ -137,6 +137,11 @@ test("requested widths have no horizontal overflow, images load, no runtime erro
   expect(errors).toEqual([]);
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/");
+  await expect(page.locator("#jornada .journey-panel")).toBeVisible();
+  for (const img of await page.locator("img").all())
+    await img.scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: "test-results/desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: "test-results/mobile.png", fullPage: true });
@@ -230,4 +235,43 @@ test("accessible contrast and semantics on desktop, mobile and open menu", async
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
   expect(results.violations).toEqual([]);
+});
+
+test("readable text can grow without horizontal overflow and step focus stays clear of the header", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await expect(page.locator("#jornada .journey-panel")).toBeVisible();
+  expect(
+    await page
+      .locator(".campaign-summary p")
+      .evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
+  ).toBeGreaterThanOrEqual(16);
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "200%";
+  });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+  const journey = page.locator("#jornada");
+  await journey
+    .getByRole("button", { name: "Criar constância", exact: true })
+    .click();
+  await journey.getByRole("button", { name: "Continuar", exact: true }).click();
+  const title = journey.getByRole("heading", {
+    name: "O que mais dificulta seu caminho?",
+  });
+  await expect(title).toBeFocused();
+  await expect
+    .poll(async () => (await title.boundingBox())!.y)
+    .toBeGreaterThanOrEqual(96);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
 });

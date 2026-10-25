@@ -1,6 +1,6 @@
 # The Consistency Project
 
-Landing page em português para acompanhamento de treinamento, com React 19, TypeScript, Vite e Tailwind CSS. Direção visual em carbono e azul elétrico; fontes Barlow Condensed e Manrope locais. CSS cuida da entrada do hero; GSAP/ScrollTrigger são carregados após a primeira tela para os efeitos de scroll. Motion cuida apenas das transições da jornada, carregada em um chunk separado.
+Landing page em português para acompanhamento de treinamento, com React 19, TypeScript, Vite e Tailwind CSS. Direção editorial de caderno de treino, com fotografia em contexto, seção clara de rotina e fechamento azul; fontes Barlow Condensed e Manrope locais. CSS cuida da entrada do hero; GSAP/ScrollTrigger são carregados após a primeira tela para os efeitos de scroll. Motion cuida apenas das transições da jornada, carregada em um chunk separado.
 
 ## Executar
 
@@ -18,6 +18,15 @@ npm test
 npm run build
 npm run preview
 ```
+
+## Direção visual e skills
+
+A revisão usa as skills fornecidas pelo usuário: `ui-ux-pro-max`, `brand`, `design-system`, `ui-styling` e `banner-design`. As recomendações foram adaptadas à landing page e à paleta obrigatória, sem gamificação, verde ou prescrição automática.
+
+- `design-system/consistency-project/MASTER.md`: decisões, pesquisas verificadas e critérios de entrega.
+- `docs/brand-guidelines.md`: voz, fotografia, identidade e composição.
+- `src/styles/tokens.css`: tokens primitivos → semânticos → componentes.
+- `src/styles/globals.css`: estilos consolidados; corpo em 16px, notas de 14px e controles de pelo menos 44px.
 
 ## Configurar conteúdo real
 
@@ -50,7 +59,7 @@ Se já houver Chromium no ambiente:
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
 ```
 
-Playwright inicia o servidor automaticamente. Os testes cobrem os quatro caminhos da jornada, voltar/reiniciar, ausência de contato, menu/Escape/foco, método, modalidade, FAQ, imagens e overflow em 360, 375, 390, 430, 768, 1024, 1440 e 1920 pixels. Também cobrem o link real de WhatsApp com número de teste, foco entre etapas e auditoria axe WCAG A/AA em desktop, mobile e menu aberto. Capturas ficam em `test-results/` (ignorado pelo Git).
+Playwright inicia o servidor automaticamente. Os testes cobrem os quatro caminhos da jornada, voltar/reiniciar, ausência de contato, menu/Escape/foco, método, modalidade, FAQ, imagens e overflow em 360, 375, 390, 430, 768, 1024, 1440 e 1920 pixels. Também cobrem aumento do texto para 200%, foco visível abaixo do header e o link real de WhatsApp com número de teste, foco entre etapas e auditoria axe WCAG A/AA em desktop, mobile e menu aberto. Capturas ficam em `test-results/` (ignorado pelo Git).
 
 ## Publicação
 

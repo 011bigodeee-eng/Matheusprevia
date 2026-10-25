@@ -32,8 +32,9 @@ export default function App() {
             const context = gsap.context(() => {
               gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) =>
                 gsap.from(el, {
-                  y: 26,
-                  duration: 0.7,
+                  y: 12,
+                  duration: 0.35,
+                  ease: "power1.out",
                   scrollTrigger: {
                     trigger: el,
                     start: "top 92%",
@@ -71,6 +72,7 @@ export default function App() {
       <main id="main">
         <Hero />
         <Manifesto />
+        <Problem />
         <section id="jornada">
           <Suspense
             fallback={
@@ -82,7 +84,6 @@ export default function App() {
             <Journey />
           </Suspense>
         </section>
-        <Problem />
         <Method />
         <Stories />
         <Coach />
