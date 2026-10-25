@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./method-carousel.css";
 @theme inline {
   --color-brand: var(--color-accent);
   --font-sans: var(--font-body);
@@ -815,115 +816,6 @@ section[id] {
   margin-bottom: 48px;
   font-size: clamp(48px, 6vw, 100px);
 }
-.method-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 8%;
-  align-items: start;
-}
-.method-visual {
-  position: sticky;
-  top: 104px;
-  overflow: hidden;
-  background: var(--color-background);
-  min-height: 680px;
-}
-.method-watermark {
-  position: absolute;
-  top: 20px;
-  left: 24px;
-  font-family: var(--font-heading);
-  font-size: 80px;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--color-text);
-  z-index: 1;
-  text-shadow: 0 2px 16px var(--color-background);
-}
-.method-visual > img {
-  position: absolute;
-  inset: 0 0 auto;
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  filter: grayscale(1) brightness(0.7);
-}
-.method-caption {
-  position: relative;
-  padding: 312px 32px 32px;
-}
-.method-caption .eyebrow {
-  color: var(--color-accent-hover);
-}
-.method-caption h3 {
-  font-size: 30px;
-  font-weight: 500;
-  letter-spacing: -0.055em;
-  line-height: 1.15;
-  max-width: 360px;
-  margin: 20px 0 16px;
-}
-.method-caption p {
-  font-size: var(--text-small);
-}
-.method-caption .image-label {
-  margin-top: 24px;
-}
-.method-steps article {
-  border-bottom: 1px solid var(--color-border);
-  padding: 32px 0;
-}
-.method-steps article:first-child {
-  padding-top: 12px;
-}
-.method-steps article > button {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  min-height: 48px;
-  width: 100%;
-  text-align: left;
-}
-.method-steps article > button > span {
-  color: var(--color-muted);
-  font-size: var(--text-label);
-}
-.method-steps h3 {
-  font-family: var(--font-heading);
-  font-size: 40px;
-  color: var(--color-muted);
-  font-weight: 700;
-  letter-spacing: 0;
-}
-.method-steps article.active h3 {
-  color: var(--color-text);
-}
-.method-steps article.active > button > span,
-.method-steps article.active svg {
-  color: var(--color-accent-hover);
-}
-.method-steps article > button > svg {
-  margin-left: auto;
-}
-.method-steps article > p {
-  font-size: var(--text-small);
-  max-width: 360px;
-  margin: 16px 0 24px 40px;
-}
-.phase-line {
-  height: 2px;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--duration-normal);
-  margin-left: 40px;
-}
-.active .phase-line {
-  transform: scaleX(1);
-}
-.method-mobile-controls {
-  display: none;
-}
 /* Honest, quiet spaces for real stories and content. */
 .stories {
   border-bottom: 1px solid var(--color-border);
@@ -1492,25 +1384,6 @@ section[id] {
   .journey-visual {
     min-height: 760px;
   }
-  .method-grid {
-    gap: 6%;
-    grid-template-columns: 1fr 1fr;
-  }
-  .method-caption {
-    padding-inline: 24px;
-  }
-  .method-visual {
-    min-height: 740px;
-  }
-  .method-steps h3 {
-    font-size: 34px;
-  }
-  .method-steps article > p {
-    margin-left: 36px;
-  }
-  .method-steps article > button {
-    gap: 20px;
-  }
   .coach {
     gap: 8%;
   }
@@ -1683,45 +1556,6 @@ section[id] {
   }
   .journey-actions > .privacy-note {
     max-width: 120px;
-  }
-  .method-visual {
-    position: relative;
-    top: auto;
-    min-height: 780px;
-  }
-  .method-caption {
-    padding-bottom: 96px;
-  }
-  .method-steps article {
-    padding-block: 28px;
-  }
-  .method-steps article > button {
-    gap: 14px;
-  }
-  .method-steps h3 {
-    font-size: 30px;
-  }
-  .method-steps article > button > svg {
-    width: 20px;
-  }
-  .method-steps article > p {
-    margin-left: 30px;
-  }
-  .method-mobile-controls {
-    display: flex;
-    position: absolute;
-    inset: auto 24px 24px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    font-size: var(--text-small);
-  }
-  .method-mobile-controls button {
-    display: grid;
-    place-items: center;
-    width: 48px;
-    height: 48px;
-    border: 1px solid var(--color-border);
   }
   .stories-layout {
     grid-template-columns: 1fr 1fr;
@@ -2126,80 +1960,6 @@ section[id] {
     font-size: clamp(45px, 11.2vw, 66px);
     line-height: 0.98;
     margin-bottom: 32px;
-  }
-  .method-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .method-visual {
-    min-height: 0;
-    position: relative;
-    padding-bottom: 96px;
-  }
-  .method-visual > img {
-    position: relative;
-    height: 220px;
-  }
-  .method-watermark {
-    font-size: 68px;
-    left: 20px;
-    top: 16px;
-  }
-  .method-caption {
-    padding: 28px 24px 0;
-  }
-  .method-caption .eyebrow {
-    font-size: var(--text-label);
-    letter-spacing: 0.06em;
-  }
-  .method-caption h3 {
-    font-size: 29px;
-    max-width: 300px;
-    margin: 20px 0 16px;
-  }
-  .method-caption p {
-    font-size: var(--text-small);
-  }
-  .method-caption .image-label {
-    font-size: var(--text-label);
-    margin-top: 20px;
-  }
-  .method-mobile-controls {
-    inset: auto 24px 24px;
-    font-size: var(--text-small);
-  }
-  .method-steps {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-  }
-  .method-steps article,
-  .method-steps article:first-child {
-    padding: 12px 0;
-    border: 0;
-  }
-  .method-steps article > button {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-    min-height: 68px;
-  }
-  .method-steps article > button > span {
-    font-size: var(--text-label);
-  }
-  .method-steps article > button > svg,
-  .method-steps article > p {
-    display: none;
-  }
-  .method-steps h3 {
-    font-family: var(--font-heading);
-    font-size: 18px;
-    letter-spacing: 0;
-    font-weight: 700;
-    line-height: 1;
-  }
-  .phase-line {
-    margin: 12px 0 0;
   }
   .stories {
     padding-block: 48px;

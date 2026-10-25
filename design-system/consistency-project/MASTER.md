@@ -27,7 +27,7 @@ Botões primários de 56px, controles de pelo menos 44px, bordas retas, seleçã
 1. Hero: mensagem única, fotografia em quadro, CTA acima da fotografia no mobile.
 2. Contexto: papel claro, nota editorial e situações de rotina; sem depoimento fictício.
 3. Jornada: quatro perguntas + resumo, progresso, voltar preservando respostas, reiniciar, envio explícito.
-4. Método: quatro fases com painel no desktop; controles visíveis no mobile.
+4. Método: carrossel de quatro fases, com scroll-snap nativo, deslize, setas, indicadores diretos e teclado. Sem avanço automático; movimento reduzido usa transição imediata.
 5. Perfil/serviços: dados verificáveis, modalidades claramente identificadas.
 6. Relatos/conteúdos: estados curtos e honestos até receber dados autorizados.
 7. FAQ e fechamento: respostas claras e próximo passo.

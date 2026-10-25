@@ -84,9 +84,9 @@ test("mobile menu has keyboard focus, Escape, links and methods work", async ({
     .locator("#metodo")
     .getByRole("button", { name: "Próxima fase" })
     .click();
-  await expect(page.locator(".method-caption h3")).toHaveText(
-    "Estratégia que cabe na rotina.",
-  );
+  await expect(
+    page.locator('.method-slide[aria-hidden="false"] .method-caption h3'),
+  ).toHaveText("Estratégia que cabe na rotina.");
   await page
     .locator("#servicos")
     .getByRole("button", { name: "PRESENCIAL", exact: true })
@@ -269,6 +269,53 @@ test("readable text can grow without horizontal overflow and step focus stays cl
   await expect
     .poll(async () => (await title.boundingBox())!.y)
     .toBeGreaterThanOrEqual(96);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+});
+
+test("method carousel supports horizontal swiping, arrows, direct selection and keyboard", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const method = page.locator("#metodo");
+  const track = method.locator(".method-track");
+  await expect(
+    method.getByRole("button", { name: "Fase anterior", exact: true }),
+  ).toBeDisabled();
+  await method
+    .getByRole("button", { name: "Próxima fase", exact: true })
+    .click();
+  await expect(
+    method.locator('.method-slide[aria-hidden="false"]'),
+  ).toContainText("Estratégia que cabe na rotina.");
+  // Native scrolling uses the same path as a touch swipe, without intercepting vertical page scrolling.
+  await track.evaluate((el) =>
+    el.scrollTo({ left: el.clientWidth * 2, behavior: "instant" }),
+  );
+  await expect(
+    method.locator('.method-slide[aria-hidden="false"]'),
+  ).toContainText("Cada repetição tem um porquê.");
+  await track.focus();
+  await page.keyboard.press("End");
+  await expect(
+    method.getByRole("button", { name: "Próxima fase", exact: true }),
+  ).toBeDisabled();
+  await page.keyboard.press("Home");
+  await expect(
+    method.locator('.method-slide[aria-hidden="false"]'),
+  ).toContainText("Antes do treino, a sua vida.");
+  await method
+    .getByRole("button", { name: "Ir para fase 4: EVOLUIR", exact: true })
+    .click();
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await expect(
+    method.locator('.method-slide[aria-hidden="false"]'),
+  ).toContainText("O plano acompanha você.");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,

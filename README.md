@@ -44,7 +44,7 @@ A jornada não prescreve treino. As respostas são mantidas em memória, não s�
 
 ## Interações
 
-Jornada de cinco etapas com quatro objetivos, desafios próprios, seleção única, progresso, voltar, reiniciar e mensagem codificada. Menu modal com Escape, contenção nativa de foco e retorno ao botão. Fases do método por scroll no desktop e botões no mobile. Modalidades interativas, FAQ nativo e componentes de histórias/conteúdos que usam os dados reais quando configurados. Animações respeitam movimento reduzido.
+Jornada de cinco etapas com quatro objetivos, desafios próprios, seleção única, progresso, voltar, reiniciar e mensagem codificada. Menu modal com Escape, contenção nativa de foco e retorno ao botão. Carrossel do método com deslize horizontal nativo, setas, seleção direta, teclado e posição preservada ao redimensionar. Modalidades interativas, FAQ nativo e componentes de histórias/conteúdos que usam os dados reais quando configurados. Animações respeitam movimento reduzido.
 
 ## Testes de navegador
 

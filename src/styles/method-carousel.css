@@ -1,0 +1,178 @@
+.method-carousel {
+  min-width: 0;
+}
+.method-track {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--color-border);
+}
+.method-track::-webkit-scrollbar {
+  display: none;
+}
+.method-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: var(--color-background);
+}
+.method-photo {
+  position: relative;
+  min-height: 380px;
+}
+.method-photo > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.75);
+}
+.method-watermark {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  font: 800 80px/1 var(--font-heading);
+  color: var(--color-text);
+  text-shadow: 0 2px 16px var(--color-background);
+}
+.method-caption {
+  padding: 48px;
+  align-self: center;
+}
+.method-caption .eyebrow {
+  color: var(--color-accent-hover);
+}
+.method-caption h3 {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.055em;
+  margin: 24px 0;
+  max-width: 420px;
+}
+.method-caption p {
+  font-size: var(--text-body);
+}
+.method-caption .image-label {
+  margin-top: 24px;
+}
+.method-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 0;
+  font-size: var(--text-small);
+}
+.method-controls button {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  transition: background var(--duration-fast);
+}
+.method-controls button:hover:not(:disabled) {
+  background: var(--color-elevated);
+}
+.method-current-name {
+  color: var(--color-muted);
+}
+.method-pagination {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.method-pagination button {
+  min-width: 0;
+  min-height: 76px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--color-muted);
+  padding: 8px 0;
+}
+.method-pagination button > span:first-child {
+  font-size: var(--text-label);
+}
+.method-pagination strong {
+  font: 700 clamp(18px, 2.5vw, 32px)/1.1 var(--font-heading);
+}
+.method-pagination button[aria-current] {
+  color: var(--color-text);
+}
+.method-pagination button[aria-current] > span:first-child {
+  color: var(--color-accent-hover);
+}
+.method-pagination-line {
+  height: 2px;
+  background: var(--color-border);
+  width: 100%;
+  margin-top: 8px;
+}
+.method-pagination button[aria-current] .method-pagination-line {
+  background: var(--color-accent);
+}
+@media (max-width: 899px) {
+  .method-caption {
+    padding: 32px;
+  }
+  .method-photo {
+    min-height: 400px;
+  }
+}
+@media (max-width: 620px) {
+  .method-slide {
+    grid-template-columns: 1fr;
+  }
+  .method-photo {
+    min-height: 0;
+    height: 220px;
+  }
+  .method-watermark {
+    font-size: 68px;
+    top: 16px;
+    left: 20px;
+  }
+  .method-caption {
+    padding: 28px 24px 32px;
+    align-self: start;
+  }
+  .method-caption h3 {
+    font-size: 29px;
+    margin: 20px 0 16px;
+  }
+  .method-caption p {
+    font-size: var(--text-small);
+  }
+  .method-caption .eyebrow {
+    font-size: var(--text-label);
+    letter-spacing: 0.06em;
+  }
+  .method-controls {
+    padding: 20px 0;
+  }
+  .method-current-name {
+    display: none;
+  }
+  .method-pagination {
+    gap: 12px;
+  }
+  .method-pagination strong {
+    font-size: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .method-track {
+    scroll-behavior: auto;
+  }
+}

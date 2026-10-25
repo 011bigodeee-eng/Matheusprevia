@@ -187,29 +187,35 @@ export function Problem() {
 }
 export function Method() {
   const [phase, setPhase] = useState(0);
-  const steps = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const current = useRef(0);
+  const go = (index: number) => {
+    const el = track.current;
+    if (!el) return;
+    const next = Math.max(0, Math.min(phases.length - 1, index));
+    el.scrollTo({
+      left: next * el.clientWidth,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
+  };
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (window.innerWidth < 900) return;
-        for (const e of entries)
-          if (e.isIntersecting)
-            setPhase(Number((e.target as HTMLElement).dataset.phase));
-      },
-      { rootMargin: "-25% 0px -45% 0px", threshold: 0 },
-    );
-    steps.current
-      ?.querySelectorAll("[data-phase]")
-      .forEach((el) => observer.observe(el));
+    const el = track.current;
+    if (!el) return;
+    const observer = new ResizeObserver(() => {
+      el.scrollTo({
+        left: current.current * el.clientWidth,
+        behavior: "instant",
+      });
+    });
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
   return (
     <section className="section method" id="metodo">
       <div className="section-top">
-        <span className="eyebrow">
-          <span />
-          03 / O MÉTODO
-        </span>
+        <span className="eyebrow">03 / O MÉTODO</span>
         <span className="small-note">SEM ATALHOS. COM DIREÇÃO.</span>
       </div>
       <h2>
@@ -217,60 +223,114 @@ export function Method() {
         <br />
         <em>FAZER. AJUSTAR.</em>
       </h2>
-      <div className="method-grid">
-        <div className="method-visual">
-          <span className="method-watermark" aria-hidden="true">
-            0{phase + 1}
-          </span>
-          <Photo
-            key={phases[phase].image}
-            src={phases[phase].image}
-            alt="Fotografia ilustrativa de treinamento"
-            width="660"
-            height="753"
-            loading="lazy"
-          />
-          <div className="method-caption">
-            <span className="eyebrow">{phases[phase].detail}</span>
-            <h3>{phases[phase].title}</h3>
-            <p>{phases[phase].description}</p>
-            {site.images.illustrative && (
-              <span className="image-label">IMAGEM ILUSTRATIVA</span>
-            )}
-          </div>
-          <div className="method-mobile-controls">
-            <button
-              onClick={() => setPhase((p) => Math.max(0, p - 1))}
-              disabled={phase === 0}
-              aria-label="Fase anterior"
-            >
-              <ArrowLeft size={20} />
-            </button>
-            <span>0{phase + 1} / 04</span>
-            <button
-              onClick={() => setPhase((p) => Math.min(3, p + 1))}
-              disabled={phase === 3}
-              aria-label="Próxima fase"
-            >
-              <ArrowRight size={20} />
-            </button>
-          </div>
-        </div>
-        <div ref={steps} className="method-steps">
-          {phases.map((p, i) => (
+      <div
+        className="method-carousel"
+        role="region"
+        aria-roledescription="carrossel"
+        aria-label="Fases do método"
+      >
+        <div
+          id="method-slides"
+          className="method-track"
+          ref={track}
+          tabIndex={0}
+          aria-label="Use as setas do teclado ou deslize para mudar de fase"
+          onScroll={() => {
+            const el = track.current;
+            if (!el?.clientWidth) return;
+            const next = Math.max(
+              0,
+              Math.min(
+                phases.length - 1,
+                Math.round(el.scrollLeft / el.clientWidth),
+              ),
+            );
+            current.current = next;
+            setPhase(next);
+          }}
+          onKeyDown={(event) => {
+            let next: number | undefined;
+            if (event.key === "ArrowRight") next = phase + 1;
+            if (event.key === "ArrowLeft") next = phase - 1;
+            if (event.key === "Home") next = 0;
+            if (event.key === "End") next = phases.length - 1;
+            if (next !== undefined) {
+              event.preventDefault();
+              go(next);
+            }
+          }}
+        >
+          {phases.map((item, index) => (
             <article
-              data-phase={i}
-              className={phase === i ? "active" : ""}
-              key={p.name}
+              className="method-slide"
+              key={item.name}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} de ${phases.length}: ${item.name}`}
+              aria-hidden={index !== phase}
             >
-              <button onClick={() => setPhase(i)} aria-pressed={phase === i}>
-                <span>0{i + 1}</span>
-                <h3>{p.name}</h3>
-                <ArrowUpRight />
-              </button>
-              <p>{p.description}</p>
-              <div className="phase-line" />
+              <div className="method-photo">
+                <Photo
+                  src={item.image}
+                  alt="Fotografia ilustrativa de treinamento"
+                  width="660"
+                  height="753"
+                  loading="lazy"
+                />
+                <span className="method-watermark" aria-hidden="true">
+                  0{index + 1}
+                </span>
+              </div>
+              <div className="method-caption">
+                <span className="eyebrow">{item.detail}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                {site.images.illustrative && (
+                  <span className="image-label">IMAGEM ILUSTRATIVA</span>
+                )}
+              </div>
             </article>
+          ))}
+        </div>
+        <div className="method-controls">
+          <button
+            onClick={() => go(phase - 1)}
+            disabled={phase === 0}
+            aria-label="Fase anterior"
+            aria-controls="method-slides"
+          >
+            <ArrowLeft size={20} />
+          </button>
+          <span aria-live="polite" aria-atomic="true">
+            0{phase + 1} / 04{" "}
+            <span className="method-current-name">— {phases[phase].name}</span>
+          </span>
+          <button
+            onClick={() => go(phase + 1)}
+            disabled={phase === phases.length - 1}
+            aria-label="Próxima fase"
+            aria-controls="method-slides"
+          >
+            <ArrowRight size={20} />
+          </button>
+        </div>
+        <div
+          className="method-pagination"
+          role="group"
+          aria-label="Escolher fase do método"
+        >
+          {phases.map((item, index) => (
+            <button
+              key={item.name}
+              aria-label={`Ir para fase ${index + 1}: ${item.name}`}
+              aria-current={index === phase ? "step" : undefined}
+              aria-controls="method-slides"
+              onClick={() => go(index)}
+            >
+              <span>0{index + 1}</span>
+              <strong>{item.name}</strong>
+              <span className="method-pagination-line" />
+            </button>
           ))}
         </div>
       </div>

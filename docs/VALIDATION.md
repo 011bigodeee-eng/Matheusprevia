@@ -9,12 +9,18 @@ Ambiente: Node.js 24.19.0, npm 11.9.0, Linux e Chromium disponível em `/usr/bin
 - `npm run typecheck`: aprovado.
 - `npm test`: 3 testes aprovados, nenhum ignorado. Objetivos/desafios, codificação da mensagem com acentos e ausência de links para contatos inválidos.
 - `npm run build`: aprovado; aplicação estática gerada em `dist/`.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser`: 6 testes aprovados, nenhum ignorado. As verificações incluem os quatro objetivos e todas as etapas, voltar preservando respostas, reiniciar, contato ausente, WhatsApp configurado por interceptação apenas no teste, teclado e foco, menu/Escape, método, modalidades, FAQ, imagens, texto ampliado para 200%, foco abaixo do header e ausência de erros de execução.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser`: 7 testes aprovados, nenhum ignorado. As verificações incluem os quatro objetivos e todas as etapas, voltar preservando respostas, reiniciar, contato ausente, WhatsApp configurado por interceptação apenas no teste, teclado e foco, menu/Escape, método, modalidades, FAQ, imagens, texto ampliado para 200%, foco abaixo do header e ausência de erros de execução.
 - O teste de WhatsApp captura a chamada a `window.open`, valida o número e a mensagem completa; não envia mensagem nem navega para um contato real.
 - Responsividade: ausência de overflow horizontal em 360, 375, 390, 430, 768, 1024, 1440 e 1920 pixels. Capturas e inspeção visual em desktop e mobile.
 - axe WCAG 2 A/AA e 2.1 AA: nenhuma violação automática em desktop, mobile com movimento reduzido e menu aberto. Testada a circulação do foco com Tab e o retorno ao botão ao fechar.
 
+## Carrossel do método
+
+Verificado o avanço/retorno, seleção direta, rolagem horizontal nativa, teclas Home/End e preservação da fase ao alternar de mobile para desktop. A suíte completa de 7 testes de navegador passou, incluindo axe e movimento reduzido.
+
 ## Lighthouse de produção
+
+Os números abaixo foram medidos na revisão editorial anterior ao carrossel. Esta alteração não recebeu uma nova medição Lighthouse.
 
 Medição refeita após a revisão visual e dos componentes. Uma execução local com Lighthouse 13.5.0, build de produção servido com `npm run preview`, perfil mobile padrão, latência de 150 ms, taxa de 1638,4 Kbps e redução de CPU de 4×:
 
